@@ -15,16 +15,23 @@ class Biblus::CLI
   def menu
     puts "To see today's passage, type 'today'"
     puts "To get started looking up a verse, type 'lookup' (note: not functional yet)"
+    puts "You can always type 'menu' to see these options again!"
   end
 
   def input_manager
     input = gets.strip
     if input.upcase == "TODAY"
-      #scrape biblegateway.com, sets text of today's quote to @todays_passage
-      puts "Life in the Community of Christ. Brothers, even if a person is caught in some transgression, you who are spiritual should correct that one in a gentle spirit, looking to yourself, so that you also may not be tempted."
+      passage = Biblus::BibleScraper.new.scrape_biblegateway
+      puts "Today's passage is #{passage.book} #{passage.chapter}:#{passage.verse[0]}"
+      puts "#{passage.text}"
+      input_manager
+    elsif input.upcase == "MENU"
+      menu
+      input_manager
+    elsif input.upcase == "EXIT"
+      puts "Amen."
     else
       puts "I'm not sure what you mean by that... try again!"
-      menu
       input_manager
     end
   end
