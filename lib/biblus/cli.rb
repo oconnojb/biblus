@@ -1,4 +1,5 @@
 class Biblus::CLI
+  attr_accessor :todays_passage
 
   def call
     welcome
@@ -19,6 +20,7 @@ class Biblus::CLI
   def input_manager
     input = gets.strip
     if input.upcase == "TODAY"
+      #scrape biblegateway.com, sets text of today's quote to @todays_passage
       puts "Life in the Community of Christ. Brothers, even if a person is caught in some transgression, you who are spiritual should correct that one in a gentle spirit, looking to yourself, so that you also may not be tempted."
     else
       puts "I'm not sure what you mean by that... try again!"
