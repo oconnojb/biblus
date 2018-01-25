@@ -1,3 +1,5 @@
+require 'pry'
+
 class Biblus::CLI
   attr_accessor :todays_passage
 
@@ -30,6 +32,8 @@ class Biblus::CLI
     puts "***"
     puts "#{@todays_passage.text}"
     puts "#{@todays_passage.book} #{@todays_passage.chapter}:#{@todays_passage.verse[0]}"
+    sleep(1)
+    puts "*"
     puts "If you liked today's passage, you can type 'full' to read the rest of #{@todays_passage.book} #{@todays_passage.chapter}"
     puts "***"
   end
@@ -54,11 +58,15 @@ class Biblus::CLI
   def display_full_chapter
     full_chapter_array = Biblus::BibleScraper.new.scrape_full_chapter(@todays_passage.link_to_full)
     puts "***"
+    puts "#{@todays_passage.book} #{@todays_passage.chapter}"
+    puts "*"
+    sleep(1)
     i=0
     full_chapter_array.each do |verse|
-      if verse != " "
+      if (verse != "") && (verse != ", ")
         i+=1
         puts "#{i}. #{verse.gsub(/\u00A0/, "")}"
+        sleep(0.25)
       end
     end
     puts "***"
