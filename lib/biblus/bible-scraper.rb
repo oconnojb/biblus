@@ -12,6 +12,8 @@ class Biblus::BibleScraper
      sp_array = citation[1].split(":")
      passage.chapter = sp_array[0]
      passage.verse << sp_array[1]
+     passage.link_to_full = "https://www.biblegateway.com"+doc.css(".votd-actions-component a")[1]['href']
+     binding.pry
      passage
   end
 end
