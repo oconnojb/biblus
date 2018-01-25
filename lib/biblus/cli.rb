@@ -86,9 +86,16 @@ class Biblus::CLI
     elsif input.upcase == "FULL"
       display_full_chapter
       input_manager
+    elsif input.upcase == "LOOKUP" || input.upcase == "LOOK UP"
+      puts "***"
+      puts "I'm sorry, that functionality hasn't been prgrammed yet!"
+      puts "Ask me something else!"
+      puts "***"
+      input_manager
     elsif input.upcase == "EXIT" || input.upcase == "END"
       puts "***"
       puts "Amen."
+      puts "***"
     else
       puts "***"
       puts "I'm not sure what you mean by that... try again!"
