@@ -1,5 +1,4 @@
 class Biblus::CLI
-  attr_accessor :todays_passage
 
   def call
     welcome
