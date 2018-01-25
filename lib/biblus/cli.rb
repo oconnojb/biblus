@@ -2,7 +2,7 @@ class Biblus::CLI
   attr_accessor :todays_passage
 
   def initialize
-    @todays_passage = Biblus::BibleScraper.new.scrape_biblegateway
+    @todays_passage = Biblus::BibleScraper.new.scrape_todays_passage
   end
 
   def call
@@ -30,6 +30,7 @@ class Biblus::CLI
     puts "***"
     puts "#{@todays_passage.text}"
     puts "#{@todays_passage.book} #{@todays_passage.chapter}:#{@todays_passage.verse[0]}"
+    puts "If you liked today's passage, you can type 'full' to read the rest of #{@todays_passage.book} #{@todays_passage.chapter}"
     puts "***"
   end
 
@@ -37,7 +38,7 @@ class Biblus::CLI
     puts "***"
     puts "Sorry! I didn't realize I was out of date!"
     hm = @todays_passage
-    @todays_passage = Biblus::BibleScraper.new.scrape_biblegateway
+    @todays_passage = Biblus::BibleScraper.new.scrape_todays_passage
     sleep(1)
     if hm.text == @todays_passage.text
       puts "***"
@@ -48,6 +49,19 @@ class Biblus::CLI
       puts "Here, I should have the right passage now!"
       display_todays_passage
     end
+  end
+
+  def display_full_chapter
+    full_chapter_array = Biblus::BibleScraper.new.scrape_full_chapter(@todays_passage.link_to_full)
+    puts "***"
+    i=0
+    full_chapter_array.each do |verse|
+      if verse != " "
+        i+=1
+        puts "#{i}. #{verse.gsub(/\u00A0/, "")}"
+      end
+    end
+    puts "***"
   end
 
   def input_manager
@@ -61,7 +75,10 @@ class Biblus::CLI
     elsif input.upcase == "MENU"
       menu
       input_manager
-    elsif input.upcase == "EXIT"
+    elsif input.upcase == "FULL"
+      display_full_chapter
+      input_manager
+    elsif input.upcase == "EXIT" || input.upcase == "END"
       puts "***"
       puts "Amen."
     else
