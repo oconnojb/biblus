@@ -3,12 +3,6 @@ require 'open-uri'
 require 'pry'
 
 class Biblus::BibleScraper
-  attr_accessor :passage_hash
-
-   def initialize
-     @passage_hash = {}
-   end
-
    def scrape_biblegateway
      doc = Nokogiri::HTML(open("https://www.biblegateway.com/"))
      passage = Passage.new
