@@ -102,5 +102,4 @@ class Biblus::CLI
       input_manager
     end
   end
-
 end

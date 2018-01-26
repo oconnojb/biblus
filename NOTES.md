@@ -1,11 +1,11 @@
 1 -x- Plan your gem, imagine your interface
 2 -x- Start with the project structure - google
 3 -x- Start with the entry point - the file run
-4 - - force that to build the CLI interface
-5 - - stub out the interface
-6 - - start making things real
-7 - - discover objects.
-8 - - program
+4 -x- force that to build the CLI interface
+5 -x- stub out the interface
+6 -x- start making things real
+7 -x- discover objects.
+8 -x- program
 
 BIBLUS: A BIBLE LOOKUP CLI (mock)
 
